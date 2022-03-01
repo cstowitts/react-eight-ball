@@ -14,34 +14,58 @@ import React, { useState } from "react"; //react is default export, {} is other 
  * App -> EightBall 
  */
 
-function EightBall({ answers }){
+function EightBall({ answers }) {
     //prop is an obj, so {answers} destructures it so we can use its values more easily
 
-    const [msg, setMsg] = useState("think of a question");
-    const [color, setColor] = useState("black");
+    // const [msg, setMsg] = useState("think of a question");
+    // const [color, setColor] = useState("black");
+    const [msgAndColor, setMsgAndColor] = useState({ msg: "Think of a question", color: "black" }) ;
 
-    
-    function updateMsgAndColor(){
-        const idx = getRandomIdx(answers.length);
-        const answer = answers[idx];
-        setMsg(answer.msg);
-        setColor(answer.color);
+    //TODO: put this in css file --everything static (not background)
+    const eightballStyle = {
+        backgroundColor: msgAndColor.color,
+        width: "200px",
+        height: "200px",
+        borderRadius: "50%",
+        color: "white",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
     }
 
+    /**
+     * handle click on eightball -- 
+     * set msg and color to random answer
+     */
+    function updateMsgAndColor() {
+        const idx = getRandomIdx(answers.length);
+        const answer = answers[idx];
+        setMsgAndColor(answer);
+        // setMsg(answer.msg);
+        // setColor(answer.color);
+    }
+
+    //style = {} will add to css, rather than replace
 
     return (
-        <div className="EightBall" onClick={updateMsgAndColor}>
-            { msg }
+        <div className="EightBall"
+            onClick={updateMsgAndColor}
+            style={eightballStyle}>
+            {msgAndColor.msg}
         </div>
     )
 
 
-    
-  
+
+
 }
 
+/**
+ * Generates a random integer between 0 and max
+ */
+function getRandomIdx(max) {
+    const randomIdx = Math.floor(Math.random() * max);
+    return randomIdx;
+}
 
-  function getRandomIdx(max) {
-       const randomIdx = Math.floor(Math.random() * max);
-       return randomIdx;
-    }
+export default EightBall;
