@@ -1,6 +1,13 @@
 
 import EightBall from "./EightBall";
 
+// don't forget to import!! we didn't need to export the CSS file
+import "./EightBall.css";
+
+
+
+// global variable, never changes so we need to make sure 
+// that this is reflected in the variable name
 const ANSWERS = [
     { msg: "It is certain.", color: "green" },
     { msg: "It is decidedly so.", color: "green" },
@@ -37,7 +44,7 @@ function App(){
 
     return(
         <div>
-            <EightBall answers={ANSWERS} />
+            <EightBall answers={ ANSWERS } />
         </div>
     )
 }

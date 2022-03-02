@@ -17,21 +17,24 @@ import React, { useState } from "react"; //react is default export, {} is other 
 function EightBall({ answers }) {
     //prop is an obj, so {answers} destructures it so we can use its values more easily
 
+    // original answer: 
     // const [msg, setMsg] = useState("think of a question");
     // const [color, setColor] = useState("black");
+
+    // but msg and color are always together and never change independently of each other
+    // so we can have them as a single state using an object 
+    // bascially the setter fn (setMsgAndColor) is like a db, 
+    // looks up the variables msg and color
+    // and updates them with the value of whatever we pass in (in this case, {answer})
     const [msgAndColor, setMsgAndColor] = useState({ msg: "Think of a question", color: "black" }) ;
 
-    //TODO: put this in css file --everything static (not background)
+    // moved static styles to EightBall.css
+    // only include styling that is DYNAMIC    
     const eightballStyle = {
         backgroundColor: msgAndColor.color,
-        width: "200px",
-        height: "200px",
-        borderRadius: "50%",
-        color: "white",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
     }
+    // the color is now the color property on our new state obj (msgAndColor)
+
 
     /**
      * handle click on eightball -- 
@@ -41,6 +44,8 @@ function EightBall({ answers }) {
         const idx = getRandomIdx(answers.length);
         const answer = answers[idx];
         setMsgAndColor(answer);
+
+        // original answer: 
         // setMsg(answer.msg);
         // setColor(answer.color);
     }
